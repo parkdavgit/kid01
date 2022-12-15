@@ -25,7 +25,7 @@ SECRET_KEY = 'hib=j35@zp!g#)jzpf4(+&zki_u+@)v)pbh#xcvix&ue^^qvwd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-3-21-242-219.us-east-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-3-133-104-133.us-east-2.compute.amazonaws.com']
 
 # Application definition
 
@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'kid_db',
         'User' : 'park',
         'PASSWORD':'4444', ## 추가된 부분 
-        'HOST':'3.21.242.219' ## 추가된 부분
+        'HOST':'3.133.104.133' ## 추가된 부분
     }
 }
 
