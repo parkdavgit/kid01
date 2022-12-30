@@ -25,7 +25,7 @@ SECRET_KEY = 'hib=j35@zp!g#)jzpf4(+&zki_u+@)v)pbh#xcvix&ue^^qvwd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-3-22-117-124.us-east-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-13-58-160-229.us-east-2.compute.amazonaws.com']
 
 # Application definition
 
@@ -77,10 +77,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'kid_db',
-        'User' : 'park',
+        'User' : 'postgres',
         'PASSWORD':'4444', ## 추가된 부분 
-        'HOST':'3.22.117.124', ## 추가된 부분
-        'port':'5432'
+        'HOST':'13.58.160.229' ## 추가된 부분
+        
     }
 }
 
