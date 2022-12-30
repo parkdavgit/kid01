@@ -78,7 +78,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'ubuntu',
         'User' : 'postgres',
-        'PASSWORD':'4444', ## 추가된 부분 
+        'PASSWORD':'1019', ## 추가된 부분 
         'HOST':'13.58.160.229' ## 추가된 부분
         
     }
