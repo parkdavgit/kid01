@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'kid01.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'kid_db',
+        'NAME': 'ubuntu',
         'User' : 'postgres',
         'PASSWORD':'4444', ## 추가된 부분 
         'HOST':'13.58.160.229' ## 추가된 부분
