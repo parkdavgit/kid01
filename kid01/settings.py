@@ -25,7 +25,7 @@ SECRET_KEY = 'hib=j35@zp!g#)jzpf4(+&zki_u+@)v)pbh#xcvix&ue^^qvwd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-18-118-114-43.us-east-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['ec2-3-15-163-245.us-east-2.compute.amazonaws.com']
 
 # Application definition
 
@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'ubuntu',
         'User' : 'ubuntu',
         'PASSWORD':'1019', ## 추가된 부분 
-        'HOST':'18.118.114.43', ## 추가된 부분
+        'HOST':'3.15.163.245', ## 추가된 부분
         'PORT': '5432',
     }
 }
