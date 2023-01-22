@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block contents %}
+<div class="container my-3">
+ <table class="table">
+ <thead class="thead-dark">
+ <tr>
+ <th>순서</th>
+ <th>제목</th>
+ <th>작성자</th>
+ <th>작성일</th>
+
+ </tr>
+ </thead>
+  <tbody>
+
+ 
+ {% for post in question_list %}
+   <tr>
+   <td>{{ post.id }}</td>
+   <td><a href="#">{{ post.title }}</a>
+    
+
+   </td>
+
+
+
+
+   <!-- 수정 -->
+   <td> {{ post.author }} </td>
+  <!-- 수정 -->
+    <td> {{ post.create_at }} </td>
+    </tr>
+
+ {% endfor %}
+
+ {% include 'includes/paginator.html' %}
+  </tbody>
+  </table>
+ 
+ 
+</div>
+
+{% endblock %}
+  
