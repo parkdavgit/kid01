@@ -12,7 +12,7 @@ def index(request):
     return render(request, 'index.html')
 
 def notice(request): 
-    question_list = Post.objects.order_by('-create_at') 
+    question_list = Post.objects.all()
     # 입력 파라미터
     page = request.GET.get('page','1')
      
@@ -20,3 +20,4 @@ def notice(request):
     paginator = Paginator(question_list, 3)
     page_obj = paginator.get_page(page)
     return render(request, 'notice.html',{'question_list':page_obj})
+
