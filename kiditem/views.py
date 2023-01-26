@@ -21,3 +21,8 @@ def notice(request):
     page_obj = paginator.get_page(page)
     return render(request, 'notice.html',{'question_list':page_obj})
 
+def notice_detail(request, pk):
+    categories = Category.objects.all()
+    post = Post.objects.get(pk=pk)
+    context = {"post": post, "categories":  categories}
+    return render(request, 'notice_detail.html', context)
