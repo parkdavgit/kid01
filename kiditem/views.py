@@ -8,8 +8,15 @@ from django.contrib import messages
 from .models import Product,Category,Point, Cart, Order, Post 
 from django.utils import timezone
 
-def index(request): 
-    return render(request, 'index.html')
+def index(request):
+    products = Product.objects.all()
+    categories = Category.objects.all()
+    context = {'products': products, 'categories': categories}
+    return render(request, 'index.html', context)
+
+
+
+
 
 def notice(request): 
     question_list = Post.objects.all()

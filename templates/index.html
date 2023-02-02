@@ -2,7 +2,60 @@
 {% block contents %}
 
 
-  <div class="container my-3">
+<div class="container my-3">
+  <table class="table">
+  <thead class="thead-dark">
+  <tr>
+  <th>CATEGORY</th>
+  </tr>
+  </thead>
+
+  <tbody>
+                      
+  <tr><td>{% for category in categories %}
+          <a href="#">{{ category.sort }}</a><br>
+          {% endfor %}  
+      </td>
+        
+  </tr></tbody>
+  </table>
+</div>
+
+
+
+
+
+div class="container my-3">
+  <table class="table">
+  <thead class="thead-dark">
+  <tr>
+  <th>ALL PRODUCTS</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr> <td>
+
+   <table><tr><td>
+  
+
+      {% for product in products %}
+     
+          
+      <a href="#">"{{ product.name }}"></a>
+                           
+     
+     {% endfor %}
+  </td></tr></table>   
+
+  </td></tr>
+  </tbody>
+
+  </table>
+ 
+</div>
+
+<div class="container my-3">
     <table class="table">
     <thead class="thead-dark">
     <tr>
