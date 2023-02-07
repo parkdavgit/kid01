@@ -43,4 +43,4 @@ def product_detail(request, pk):#category.html에서 product.pk로 urls.py로 �
     #product.category.5는 ? category.5는 product.pk가 5인 category라면 말이 된다. ????
     
     context = {"product": product, "category": category, "categories": categories}
-    return render(request, 'detail.html', context)
+    return render(request, 'product_detail.html', context)
