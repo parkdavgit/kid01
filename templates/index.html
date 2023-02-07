@@ -42,8 +42,8 @@
       {% for product in products %}
      
           
-      <a href="#">{{ product.name }}</a><br>
-                           
+      
+      <a href="{% url 'product_detail' product.pk %}">{{product.name}}</a> <br>                    
      
      {% endfor %}
   </td></tr></table>   
@@ -66,7 +66,7 @@
     <tbody>
                         
     <tr><td>  <a class="nav-link" href="{% url 'notice' %}">공지사항</a>
-      {% url 'notice' %}
+     
         </td>
           
     </tr></tbody>
