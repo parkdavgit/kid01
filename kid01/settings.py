@@ -128,5 +128,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 
 ## 추가된 부분
-#MEDIA_URL = '/uploads/'
-#MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
