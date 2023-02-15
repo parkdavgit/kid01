@@ -41,7 +41,7 @@
       <div class="row tm-mb-90 tm-gallery">
 
         {% for product in products %}
-        {% thumbnail product.image "200x200" crop="center" as im %}
+        {% thumbnail product.image "100x100" crop="center" as im %}
         <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}">
         {% endthumbnail %}
         {% endfor %}
