@@ -47,13 +47,16 @@
                 {% thumbnail product.image "200x200" crop="center" %}
                   <a href="{% url 'product_detail' product.pk %}"> 
                   <img src="{{ product.image.url }}" width="{{ product.image.width }}" height="{{ product.image.height }}" alt="{{ product.name }}" class="img-fluid"></a>
+                {% endthumbnail %}  
+                  
                   <figcaption class="d-flex align-items-center justify-content-center">
                       <div class="d-flex justify-content-between tm-text-gray"><a href="{% url 'product_detail' product.pk %}">{{product.name}}</a></div>
                   </figure> 
-                {% endthumbnail %}   
+                
               </figcaption>                    
-      </div>
-      {% endfor %}
+          </div>
+          {% endfor %}
+             
       </td>
       </tr>
       </table>     
