@@ -1,25 +1,24 @@
 {% extends 'base.html' %}
 {% block contents %}
 
+
+<div class="infoArea">
+    <h3>{{ category.sort }}{{ product.name }}</h3>
+
+<div class="detailinfo">
+    <p>{{ product.description }}</p>
+</div>
+
 <div class="container my-3">
     <table class="table">
-    <thead class="thead-dark">
-    <tr>
-    <th>{{ category.sort }}{{ product.name }}</th>
-    </tr>
-    </thead>
-
     <tbody>
-                        
-    <tr><td>{{ product.description }}</td></tr>
-    <tr><td>{{ product.price }}</td></tr>
-	<tr><td>{{ product.quantity }}</td></tr>
-
-
+    <tr><th><span>>PRICE</span</th><td>{{ product.price }}</td></tr>
+	<tr><th>수량</th><td>{{ product.quantity }}</td></tr>
 	</tbody>
     </table>
 </div>
 
+</div>
                 
 <div class="container my-3">
    <table class="table">
