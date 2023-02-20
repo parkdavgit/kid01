@@ -2,23 +2,40 @@
 {% block contents %}
 
 
+<div class="container my-3">
+         
+        <form action="#", method="POST">
+            {% csrf_token %}
+         
+            <div class="product_img_area">
+                <div class="key_img">
+                    <img src = '{{ product.image.url }}' width='300' />
+                </div>
+            </div>
+
+
 <div class="infoArea">
     <h3>{{ category.sort }}{{ product.name }}</h3>
 
 <div class="detailinfo">
-    <p>{{ product.description }}</p>
+    <p>Product Description {{ product.description }}</p>
 </div>
 
 <div class="container my-3">
     <table class="table">
     <tbody>
-    <tr><th><span>>PRICE</span</th><td>{{ product.price }}</td></tr>
+    <tr><th><span>PRICE</span</th><td>{{ product.price }}</td></tr>
 	<tr><th>수량</th><td>{{ product.quantity }}</td></tr>
 	</tbody>
     </table>
 </div>
 
+<table><tbody><tr><th>수량</th><td><input type="number" name="quantity" id="quantity" value="#"><td></tr></tbody></table>
 </div>
+
+</form>
+</div>
+
                 
 <div class="container my-3">
    <table class="table">
