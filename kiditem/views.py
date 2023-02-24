@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Product,Category,Point, Cart, Order, Post 
 from django.utils import timezone
-from .forms import OrderForm, Order1Form
+from .forms import OrderForm
 
 
 def index(request):
