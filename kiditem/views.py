@@ -64,12 +64,33 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
                     product = Product.objects.filter(pk=pk)#갈비 정보
                     Cart.objects.filter(user=user, products__in=product).update(quantity=F('quantity') + quantity)
                     messages.success(request,'장바구니 등록 완료')
-                    return redirect('cart', user.pk)
+                    return redirect('shop:cart', user.pk)
 
 
             Cart.objects.create(user=user, products=product, quantity=quantity)
             messages.success(request, '장바구니 등록 완료')
-            return redirect('cart', user.pk)
+            return redirect('shop:cart', user.pk)
+
+        elif 'buy' in request.POST:
+            form = OrderForm(request.POST, initial=initial)
+            if form.is_valid():
+                order = form.save(commit=False)
+                order.user = request.user
+                order.amount = product.price
+                order.name = product.name
+                order.order_date=timezone.now()
+                order.products=product
+                order.number=1234
+                
+                order.save()
+                return redirect('Norder_list', user.pk)
+
+            else:
+                form = OrderForm(initial=initial)
+
+            context = {'user': user, 'cart': cart, 'categories': categories, 'product':product}
+            #context = {'product':product}
+            return render(request, 'Norder_list.html', context)
 
 def cart(request, pk):#user.pk =1 or 16
     categories = Category.objects.all()
@@ -85,3 +106,18 @@ def cart(request, pk):#user.pk =1 or 16
        #cart = paginator.page(paginator.num_pages)
     context = {'user': user, 'cart': cart, 'categories': categories}
     return render(request, 'cart.html', context)
+
+def Norder_list(request, pk):
+    categories = Category.objects.all()
+    user = User.objects.get(pk=pk)
+    orders = Order.objects.filter(user=user)
+    paginator = Paginator(orders, 5)
+    page = request.GET.get('page')
+    try:
+        orders = paginator.page(page)
+    except PageNotAnInteger:
+        orders = paginator.page(1)
+    except EmptyPage:
+        orders = paginator.page(paginator.num_pages)
+    context = {'user': user, 'orders': orders, 'categories': categories}
+    return render(request, 'Norder_list.html', context)          
