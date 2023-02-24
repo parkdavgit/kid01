@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+ 
+{% block contents %}
+    
+    {% load thumbnail %}
+
+        <div class="container my-3">
+        <div id="pagetitle">
+            <h3>SHOPPING CART</h3>
+        </div>
+        <form action="#" method="POST">
+            
+    <div class="container my-3">
+        <table class="table">
+        <thead class="thead-dark">
+                    <tr>
+                        <th class="thumb">
+                            SELECT
+                        </th>
+                        <th class="thumb">
+                            IMAGE
+                        </th>
+                        <th class="product">
+                            PRODUCT
+                        </th>
+                        <th class="quantity">
+                            QUANTITY
+                        </th>
+                        <th class="amount">
+                            PRICE
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- 리스트 안에 담겨서 나오기 때문에 for 문을 써서 출력 -->
+                    {% for product in cart %}
+                        <tr>
+                            <td>
+                                <input type="radio" id="product_{{ product.id }}" name="product" value="{{ product.products.id }}">                                 
+                            </td><td>
+                                    {% thumbnail product.products.image "100x100" crop="center" as im %}
+                                    <a href="{% url 'product_detail' product.products.pk %}">
+                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}">
+                                    </a>
+                                {% endthumbnail %} 
+                            </td>
+                            <td class="product">
+                                {{ product.products.name }}
+                            </td>
+                            <td class="quantity">
+                                {{ product.quantity }}
+                            </td>
+                            <td class="price">
+                                {{ product.products.price }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    
+                    </tbody>
+                </table>
+
+            </div>
+
+          
+            
+            <div class="container my-3">
+            <table class="table">
+                <thead class="thead-dark">
+                            <tr><td>선택 상품을<button type="submit" name="delete_cart" value="delete_cart">삭제하기</button>
+                                {% csrf_token %}
+
+                            </td>
+                </tr></thead></table>
+            </div>
+
+ 
+
+        </form>
+        <!-- pagenation nav -->
+       
+
+        
+           
+
+
+    </div>
+    {% endblock contents %}

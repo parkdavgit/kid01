@@ -1,10 +1,11 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+
+
 {% block contents %}
-
-
-<div class="container my-3">
+   
+    <div class="container my-3">
          
-        <form action="#", method="POST">
+        <form action="{% url 'cart_or_buy' product.pk %}", method="POST">
             {% csrf_token %}
          
             <div class="product_img_area">
@@ -13,38 +14,89 @@
                 </div>
             </div>
 
+            <div class="infoArea">
+                <h3>{{ product.name }}</h3>
+                <div class="detailinfo">
+                    <p>{{ product.description }}</p>
+                </div>
+             
+                <div class="detail_payment">
+                    <table>
+                        <tbody>
+                        <tr>
+                            <th>
+                                <span>
+                                    PRICE
+                                </span>
+                            </th>
+                            <td>
+                                <span>
+                                    <strong>
+                                        {{ product.price }} 원
+                                    </strong>
+                                </span>
+                            </td>
+                        </tr>
+                        
+                        </tbody>
+                    </table>
 
-<div class="infoArea">
-    <h3>{{ category.sort }}{{ product.name }}</h3>
+                    <table> <tbody>
+                        <tr>
+                                    <th>
+                                        수량
+                                    </th>
+                                    <td>
 
-<div class="detailinfo">
-    <p>Product Description {{ product.description }}</p>
-</div>
-
-<div class="container my-3">
-    <table class="table">
-    <tbody>
-    <tr><th><span>PRICE</span</th><td>{{ product.price }}</td></tr>
-	<tr><th>수량</th><td>{{ product.quantity }}</td></tr>
-	</tbody>
-    </table>
-</div>
-
-<table><tbody><tr><th>수량</th><td><input type="number" name="quantity" id="quantity" value="#"><td></tr></tbody></table>
-</div>
-
-</form>
-</div>
-
+                                        <input type="number" name="quantity" id="quantity"
+                                        value="{{ form.quantity.value|default_if_none:'' }}">   
+                                                                              
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                                        
+                </div>
                 
-<div class="container my-3">
-   <table class="table">
+                </div> 
+                            
+             
+        
+        </div>
+
+        
+
+                               
+                <div class="container my-3">
+                    <table class="table">
+                    
+                
+                    <tbody>
+                                        
+                    <tr><td> <button type="submit" name="add_cart" value="add_cart">+ ADD SHOPPING CART</button>
+                    {% csrf_token %}
+                        </td>               
+                    </tr>
+                    <tr><td><button type="submit" name="buy" value="buy_it_now">BUY IT NOW</button>
+                        {% csrf_token %}
+                            </td>               
+                    </tr>
+                    <tr><td> <a href="#">장바구니로 이동</a>
+                                </td>               
+                    </tr>    
+                        
+                
+                
+                
+                </tbody>
+                    </table>
+                </div>
+                
+
+                </div>
                
-    <tbody>
-    <tr><td><a class="nav-link" href="{% url 'index' %}">HOME</a></td></tr>    
-                
-    </tbody>
-   </table>
-</div>
-                
-{% endblock contents %}
+        </form>
+    </div>
+
+
+{% endblock contents %} 

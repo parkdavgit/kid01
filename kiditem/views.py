@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Product,Category,Point, Cart, Order, Post 
 from django.utils import timezone
+from .forms import OrderForm, Order1Form
+
 
 def index(request):
     products = Product.objects.all()
@@ -44,3 +46,42 @@ def product_detail(request, pk):#category.html에서 product.pk로 urls.py로 �
     
     context = {"product": product, "category": category, "categories": categories}
     return render(request, 'product_detail.html', context)
+
+
+@login_required
+def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
+    quantity = int(request.POST.get('quantity'))#detail.html에서 선택한 quantity를 받음.
+    product = Product.objects.get(pk=pk)#pk=5인 objects 갈비 가격 재고수량....
+    user = request.user#login user
+    categories = Category.objects.all()#
+    initial = {'name': product.name, 'amount': product.price, 'quantity': quantity}#갈비 가격 그리고 카트에 담은 수
+    cart = Cart.objects.filter(user=user)#user가 login한 user의 카트 objects - user, products, quantity
+    order = Order.objects.filter(user=user) 
+    if request.method == 'POST':
+        if 'add_cart' in request.POST:
+            for i in cart :
+                if i.products == product:#카트에 product가 갈비가 있으면  
+                    product = Product.objects.filter(pk=pk)#갈비 정보
+                    Cart.objects.filter(user=user, products__in=product).update(quantity=F('quantity') + quantity)
+                    messages.success(request,'장바구니 등록 완료')
+                    return redirect('cart', user.pk)
+
+
+            Cart.objects.create(user=user, products=product, quantity=quantity)
+            messages.success(request, '장바구니 등록 완료')
+            return redirect('cart', user.pk)
+
+def cart(request, pk):#user.pk =1 or 16
+    categories = Category.objects.all()
+    user = User.objects.get(pk=pk)#user david 1111 objects
+    cart = Cart.objects.filter(user=user)#david cart 
+    #paginator = Paginator(cart, 10)
+    #page = request.GET.get('page')
+    #try:
+        #cart = paginator.page(page)
+    #except PageNotAnInteger:
+        #cart = paginator.page(1)
+    #except EmptyPage:
+       #cart = paginator.page(paginator.num_pages)
+    context = {'user': user, 'cart': cart, 'categories': categories}
+    return render(request, 'cart.html', context)
