@@ -64,12 +64,12 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
                     product = Product.objects.filter(pk=pk)#갈비 정보
                     Cart.objects.filter(user=user, products__in=product).update(quantity=F('quantity') + quantity)
                     messages.success(request,'장바구니 등록 완료')
-                    return redirect('shop:cart', user.pk)
+                    return redirect('cart', user.pk)
 
 
             Cart.objects.create(user=user, products=product, quantity=quantity)
             messages.success(request, '장바구니 등록 완료')
-            return redirect('shop:cart', user.pk)
+            return redirect('cart', user.pk)
 
         elif 'buy' in request.POST:
             form = OrderForm(request.POST, initial=initial)
