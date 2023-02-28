@@ -120,4 +120,48 @@ def Norder_list(request, pk):
     except EmptyPage:
         orders = paginator.page(paginator.num_pages)
     context = {'user': user, 'orders': orders, 'categories': categories}
-    return render(request, 'Norder_list.html', context)          
+    return render(request, 'Norder_list.html', context) 
+
+def delete_cart(request, pk): #user.pk =1 or 16 david
+    
+    user = request.user#david
+    cart = Cart.objects.filter(user=user)#
+    quantity = 0
+
+    if request.method == 'POST':
+     
+        pk =int(request.POST.get('product'))
+        product = Product.objects.get(pk=pk)
+        for i in cart:
+            if i.products == product :
+                quantity =  i.quantity
+
+        if quantity > 0 :
+            product = Product.objects.filter(pk=pk)
+            cart = Cart.objects.filter(user=user, products__in=product)
+            cart.delete()
+            return redirect('cart', user.pk)
+        
+
+def show_category(request, category_id):#category_id는 index에서 받아 온 숫자를 URLS에서 할당함 여기서 1 
+    categories = Category.objects.all()#카테로리 전체 한국 일본 중국 요리 전부
+    category = Category.objects.get(pk=category_id)#pk가 1인 object 곧 KOREAN FOOD(한국요리) 
+    #products = Product.objects.filter(category=category).order_by('pub_date')#category가 category(KOREAN FOOD)인
+    #product objects 할당. product에 category_id만 있지만 category에 연결된 외래키이므로 이렇게 사용가능한것같다
+    # 곧 product에 category가 한국요리 전체를 products에 할당해서 쓰겠다 
+    # 모든 한국요리 가격 수량 해설 등 모든 것 가짐 즉 카테로리를 한국 요리로 누르고 왔으니 그 요리 정보를 여기에 담음
+
+    products = Product.objects.filter(category_id=category_id).order_by('pub_date')
+    lank_products = Product.objects.filter(category_id=category_id).order_by('-hit')[:4]# 그 중에서 인기 순 정렬
+    paginator = Paginator(products, 3)
+    page = request.GET.get('page')
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger:
+        products = paginator.page(1)
+    except EmptyPage:
+        products = paginator.page(paginator.num_pages)
+    context = {'lank_products': lank_products, 'products': products, 'category': category, 'categories': categories}
+    return render(request, 'category.html', context)#이런 context를 category.html에서 사용할 거야
+
+

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ category }}
+{% endblock title %}
+
+{% block contents %}
+    {% load static %}
+    {% load thumbnail %}
+    <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
+
+    
+    <div class="container my-3">
+        <table class="table">
+        <thead class="thead-dark">
+        <tr>
+        <th>{{ category }}</th>
+        </tr>
+        </thead>
+    
+        <tbody>
+                            
+        <tr> {% for product in products %}
+            {% thumbnail product.image "200x200" crop="center" as im %}
+            <td><a href="{% url 'product_detail' product.pk %}"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ product.name }}"></a></td>
+            {% endthumbnail %}
+          
+
+            {% endfor %}
+            
+              
+        </tr></tbody>
+        </table>
+    </div>
+     
+{% endblock %}
