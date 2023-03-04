@@ -71,20 +71,30 @@
                                 {% csrf_token %}
 
                             </td>
-                            <tr><td> <a href="{% url 'Norder_list' user.pk %}">order site로 이동</a>
-                            </td>               
-                </tr>   
+                            
 
                 </tr></thead></table>
             </div>
 
- 
+           
+
 
         </form>
         <!-- pagenation nav -->
        
-
         
+        <div class="container my-3">
+            <table class="table">
+            <tr><td> <a class='btn btn-warning float-right ml-2' href='#'>Proceed to checkout</a>
+                </td>               
+            </tr></table>
+        </div>  
+        <div class="container my-3">
+            <table class="table">
+            <tr><td>  <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+                </td>               
+            </tr></table>
+        </div>  
            
 
 
