@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'kiditem',
     'sorl.thumbnail',
+    'django_countries',
 ]
 
 MIDDLEWARE = [
