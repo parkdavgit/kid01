@@ -167,15 +167,17 @@ def checkout(request, pk):#user.pk =1 or 16
     order = Order.objects.filter(user=user)
 
     categories = Category.objects.all()
-       
-    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
+
+    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
+           
+    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
     form = AddressForm(request.POST, initial=initial)
     if form.is_valid():
         address = form.save(commit=False)
         address.user = request.user
         address.street_address = request.street_address
         address.apartment_address = request.apartment_address
-        address.country = request.country
+       #address.country = request.country
         address.zip = request.zip
         address.address_type=request.address_type
         address.save()
