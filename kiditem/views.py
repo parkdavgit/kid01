@@ -5,7 +5,7 @@ from .models import Product, Post, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Product,Category,Point, Cart, Order, Post ,Address
+from .models import Product,Category,Point, Cart, Order, Post , Address
 from django.utils import timezone
 from .forms import OrderForm, AddressForm
 
