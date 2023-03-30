@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-   ORDER LIST
+   CHECKOUT ADDRESS
 {% endblock title %}
 
  
@@ -13,58 +13,55 @@
         <div id="board_list">
             
                     <h2>
-                        <span>ORDER LIST</span>
+                        <span>CHECKOUT ADDRESS</span>
                     </h2>
                 
         </div>
-        <div id="order_list">
+        <div class="container my-3">
              
                 <h3>
-                    <span>주문 상품 정보</span>
+                    <span>CHECKOUT ADDRESS</span>
                 </h3>
-        </div> 
-        <div class="container my-3"></div>    
+             
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
                     <th class="date">
-                        ORDER-DATE
+                        street_address
                     </th>
                     <th class="thumb">
-                        IMAGE
+                        apartment_address
                     </th>
                     <th class="product">
-                        PRODUCT
+                        country
                     </th>
                     <th class="quantity">
-                        QUANTITY
+                        zip
                     </th>
                     <th class="price">
-                        PRICE
+                        address_type
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 
-                {% for i in orders %}
+                {% for i in address %}
                     <tr>
-                        <td class="date">
-                            {{ i.order_date }}
+                        <td class="address.street_address">
+                            {{ address.street_address }}
                         </td>
-                        <td class="thumb">
-                            {% thumbnail i.products.image "100x100" crop="center" as im %}
-                                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ im.name }}">
-                            {% endthumbnail %}
+                        <td class="address.apartment">
+                            {{ address.apartment}}
                         </td>
-                        <td class="product">
-                            {{ i.products.name }}
+                        <td class="address.country">
+                            {{ address.country }}
                         </td>
-                        <td class="quantity">
-                            {{ i.quantity }}
+                        <td class="address.zip">
+                            {{ address.zip }}
                         </td> 
                                      
                         <td>
-                            {{ i.amount }}
+                            {{ address.address_type }}
                         </td>
                     </tr>
                 {% endfor %}
@@ -74,18 +71,16 @@
         </div>
 
         
-        <!-- pagenation nav -->
-        {% include 'includes/paginator.html' %}
+        <!-- pagenation nav 
+        #{% include 'includes/paginator.html' %}-->
 
         <div class="container my-3">
           <table class="table">
-          <tr><td> <a href="{% url 'checkout' user.pk %}">Proceed to checkout</a>
+          <tr><td> <a href="\">back to checkout</a>
               </td>               
           </tr></table>
         </div>  
 
 
-
-
-       
+      
 {% endblock %}

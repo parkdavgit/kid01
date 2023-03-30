@@ -5,9 +5,9 @@ from .models import Product, Post, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Product,Category,Point, Cart, Order, Post 
+from .models import Product,Category,Point, Cart, Order, Post ,Address
 from django.utils import timezone
-from .forms import OrderForm
+from .forms import OrderForm, AddressForm
 
 
 def index(request):
@@ -15,9 +15,6 @@ def index(request):
     categories = Category.objects.all()
     context = {'products': products, 'categories': categories}
     return render(request, 'index.html', context)
-
-
-
 
 
 def notice(request): 
@@ -165,3 +162,27 @@ def show_category(request, category_id):#category_id는 index에서 받아 온 �
     return render(request, 'category.html', context)#이런 context를 category.html에서 사용할 거야
 
 
+def checkout(request, pk):#user.pk =1 or 16
+    user = request.user#david
+    order = Order.objects.filter(user=user)
+
+    categories = Category.objects.all()
+       
+    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
+    form = AddressForm(request.POST, initial=initial)
+    if form.is_valid():
+        address = form.save(commit=False)
+        address.user = request.user
+        address.street_address = request.street_address
+        address.apartment_address = request.apartment_address
+        address.country = request.country
+        address.zip = request.zip
+        address.address_type=request.address_type
+        address.save()
+        return redirect('checkout', user.pk)
+
+    else:
+        form = AddressForm(initial=initial)
+        context = {'user': user, 'order': order, 'categories': categories}
+            #context = {'product':product}
+    return render(request, 'checkout.html', context)

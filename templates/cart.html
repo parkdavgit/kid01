@@ -9,7 +9,7 @@
         <div id="pagetitle">
             <h3>SHOPPING CART</h3>
         </div>
-        <form action="{% url "delete_cart" user.pk %}" method="POST">
+        <form action="{% url 'delete_cart' user.pk %}" method="POST">
             
     <div class="container my-3">
         <table class="table">
@@ -85,7 +85,7 @@
         
         <div class="container my-3">
             <table class="table">
-            <tr><td> <a class='btn btn-warning float-right ml-2' href='#'>Proceed to checkout</a>
+            <tr><td> <a href="#">Proceed to checkout</a>
                 </td>               
             </tr></table>
         </div>  
