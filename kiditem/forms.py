@@ -18,7 +18,7 @@ class OrderForm(forms.ModelForm):
 class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
-        fields = ['street_address', 'apartment_address', 'country', 'zip', 'address_type']
+        fields = ['street_address', 'apartment_address', 'zip', 'address_type']
         widgets = {
             'street_address': forms.TextInput(attrs={'readonly': 'readonly'}),
             'apartment_address': forms.TextInput(),
