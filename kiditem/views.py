@@ -88,6 +88,36 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             context = {'user': user, 'cart': cart, 'categories': categories, 'product':product}
             #context = {'product':product}
             return render(request, 'Norder_list.html', context)
+        
+def checkout(request, pk):#user.pk =1 or 16
+    user = request.user#david
+    order = Order.objects.filter(user=user)
+
+    categories = Category.objects.all()
+
+    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
+           
+    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
+    form = AddressForm(request.POST, initial=initial)
+    #form = AddressForm(request.POST)
+    if form.is_valid():
+        address = form.save(commit=False)
+        address.user = request.user
+        address.street_address = request.street_address
+        address.apartment_address = request.apartment_address
+       #address.country = request.country
+        address.zip = request.zip
+        address.address_type=request.address_type
+        #address.save()
+        form.save()
+        return redirect('checkout', user.pk)
+
+    else:
+        form = AddressForm()
+        context = {'user': user, 'order': order, 'categories': categories}
+            #context = {'product':product}
+    return render(request, 'checkout.html', context, {'form':form})
+
 
 def cart(request, pk):#user.pk =1 or 16
     categories = Category.objects.all()
@@ -162,31 +192,3 @@ def show_category(request, category_id):#category_id는 index에서 받아 온 �
     return render(request, 'category.html', context)#이런 context를 category.html에서 사용할 거야
 
 
-def checkout(request, pk):#user.pk =1 or 16
-    user = request.user#david
-    order = Order.objects.filter(user=user)
-
-    categories = Category.objects.all()
-
-    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
-           
-    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
-    #form = AddressForm(request.POST, initial=initial)
-    form = AddressForm(request.POST)
-    if form.is_valid():
-        #address = form.save(commit=False)
-        #address.user = request.user
-        #address.street_address = request.street_address
-        #address.apartment_address = request.apartment_address
-       #address.country = request.country
-        #address.zip = request.zip
-        #address.address_type=request.address_type
-        #address.save()
-        form.save()
-        return redirect('checkout', user.pk)
-
-    else:
-        form = AddressForm()
-        context = {'user': user, 'order': order, 'categories': categories}
-            #context = {'product':product}
-    return render(request, 'checkout.html', context, {'form':form})
