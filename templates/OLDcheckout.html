@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}
+   CHECKOUT ADDRESS
+{% endblock title %}
+
+ 
+{% block contents %}
+    {% load static %}
+    {% load thumbnail %}
+    <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
+    <div class="content">
+        <div id="board_list">
+            
+                    <h2>
+                        <span>CHECKOUT ADDRESS</span>
+                    </h2>
+                
+        </div>
+        <div class="container my-3">
+             
+                <h3>
+                    <span>CHECKOUT ADDRESS</span>
+                </h3>
+             
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th class="date">
+                        street_address
+                    </th>
+                    <th class="thumb">
+                        apartment_address
+                    </th>
+                    <th class="product">
+                        country
+                    </th>
+                    <th class="quantity">
+                        zip
+                    </th>
+                    <th class="price">
+                        address_type
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                
+                {% for i in address %}
+                    <tr>
+                        <td class="address.street_address">
+                            {{ address.street_address }}
+                        </td>
+                        <td class="address.apartment">
+                            {{ address.apartment}}
+                        </td>
+                        <td class="address.country">
+                             address.country 
+                        </td>
+                        <td class="address.zip">
+                            {{ address.zip }}
+                        </td> 
+                                     
+                        <td>
+                            {{ address.address_type }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        
+        <!-- pagenation nav 
+        #{% include 'includes/paginator.html' %}-->
+
+        <div class="container my-3">
+          <table class="table">
+          <tr><td> <a href="\">back to checkout</a>
+              </td>               
+          </tr></table>
+        </div>  
+
+
+      
+{% endblock %}

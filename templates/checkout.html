@@ -17,58 +17,18 @@
                     </h2>
                 
         </div>
-        <div class="container my-3">
-             
-                <h3>
-                    <span>CHECKOUT ADDRESS</span>
-                </h3>
-             
-            <table class="table">
-                <thead class="thead-dark">
-                <tr>
-                    <th class="date">
-                        street_address
-                    </th>
-                    <th class="thumb">
-                        apartment_address
-                    </th>
-                    <th class="product">
-                        country
-                    </th>
-                    <th class="quantity">
-                        zip
-                    </th>
-                    <th class="price">
-                        address_type
-                    </th>
-                </tr>
-                </thead>
-                <tbody>
-                
-                {% for i in address %}
-                    <tr>
-                        <td class="address.street_address">
-                            {{ address.street_address }}
-                        </td>
-                        <td class="address.apartment">
-                            {{ address.apartment}}
-                        </td>
-                        <td class="address.country">
-                             address.country 
-                        </td>
-                        <td class="address.zip">
-                            {{ address.zip }}
-                        </td> 
-                                     
-                        <td>
-                            {{ address.address_type }}
-                        </td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
+        <form action="" method="POST"> 
+        {% csrf_token %}    
+        <table class="table">
 
-        </div>
+        {{form.as_table}}
+
+        </table>
+        <input type="submit" value="submit">               
+        </form>    
+               
+
+    </div>
 
         
         <!-- pagenation nav 
