@@ -170,21 +170,23 @@ def checkout(request, pk):#user.pk =1 or 16
 
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
            
-    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
-    form = AddressForm(request.POST, initial=initial)
+    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
+    #form = AddressForm(request.POST, initial=initial)
+    form = AddressForm(request.POST)
     if form.is_valid():
-        address = form.save(commit=False)
-        address.user = request.user
-        address.street_address = request.street_address
-        address.apartment_address = request.apartment_address
+        #address = form.save(commit=False)
+        #address.user = request.user
+        #address.street_address = request.street_address
+        #address.apartment_address = request.apartment_address
        #address.country = request.country
-        address.zip = request.zip
-        address.address_type=request.address_type
-        address.save()
+        #address.zip = request.zip
+        #address.address_type=request.address_type
+        #address.save()
+        form.save()
         return redirect('checkout', user.pk)
 
     else:
-        form = AddressForm(initial=initial)
+        form = AddressForm()
         context = {'user': user, 'order': order, 'categories': categories}
             #context = {'product':product}
     return render(request, 'checkout.html', context)
