@@ -89,7 +89,8 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             #context = {'product':product}
             return render(request, 'Norder_list.html', context)
         
-def checkout(request, pk):#user.pk =1 or 16
+#def checkout(request, pk):#user.pk =1 or 16
+def checkout(request):#user.pk =1 or 16 
     user = request.user#david
     order = Order.objects.filter(user=user)
 
