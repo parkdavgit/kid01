@@ -97,9 +97,9 @@ def checkout(request, pk):#user.pk =1 or 16
 
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
            
-    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
-    form = AddressForm(request.POST, initial=initial)
-    #form = AddressForm(request.POST)
+    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
+    #form = AddressForm(request.POST, initial=initial)
+    form = AddressForm(request.POST)
     if form.is_valid():
         address = form.save(commit=False)
         address.user = request.user
