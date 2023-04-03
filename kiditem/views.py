@@ -110,7 +110,7 @@ def checkout(request, pk):#user.pk =1 or 16
         address.address_type=request.address_type
         #address.save()
         form.save()
-        return redirect('checkout', user.pk)
+        return redirect(request, 'OLDcheckout.html')
 
     else:
         form = AddressForm()
