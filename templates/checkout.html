@@ -5,6 +5,8 @@
     {% load static %}
     {% load thumbnail %}
     <link rel="stylesheet" type='text/css' href="{% static 'shop/style.css' %}">
+    
+    
     <div class="content">
         <div id="board_list">
             
@@ -13,6 +15,11 @@
                     </h2>
                 
         </div>
+
+    <div class="container my-3">
+        <table class="table"><tr><td>
+
+
         <form action="" method="POST"> 
         {% csrf_token %}    
         <table class="table">
@@ -22,9 +29,9 @@
         </table>
         <input type="submit" class="btn btn-primary float-right" value="CHECKOUT ADDRESS">
     
-    </form>    
+        </form>    
                
-
+        </td></tr></table>
     </div>
 
         
