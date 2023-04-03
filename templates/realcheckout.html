@@ -16,7 +16,24 @@
                 
         </div>
 
+    <div class="container my-3">
+        <table class="table"><tr><td>
+
+
+        <form action="" method="POST"> 
+        {% csrf_token %}    
+        <table class="table">
+
+        {{form.as_p}}
+
+        </table>
+        <input type="submit" class="btn btn-primary float-right" value="CHECKOUT ADDRESS">
     
+        </form>    
+               
+        </td></tr></table>
+    </div>
+
         
         <!-- pagenation nav 
         #{% include 'includes/paginator.html' %}-->
