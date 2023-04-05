@@ -114,12 +114,15 @@ def checkout(request, pk):#user.pk =1 or 16
         return redirect(request, 'OLDcheckout.html')
 
     else:
-        form = AddressForm(initial=initial1)
+        form = AddressForm()
         context = {'user': user, 'order': order, 'categories': categories}
             #context = {'product':product}
     #return render(request, 'checkout.html', context, {'form':form})
     #return render(request, 'checkout.html', context)
     return render(request, 'checkout.html', {'form':form})
+
+
+
 def cart(request, pk):#user.pk =1 or 16
     categories = Category.objects.all()
     user = User.objects.get(pk=pk)#user david 1111 objects
