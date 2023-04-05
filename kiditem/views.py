@@ -100,7 +100,7 @@ def checkout(request, pk):#user.pk =1 or 16
     initial1 = {'street_address': Address.street_address, 'apartment_address': Address.apartment_address, 'zip': Address.zip,'address_type': Address.address_type}       
     #initial1 = {'street_address': 'a', 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}
     #form = AddressForm(request.POST, initial=initial)
-    form = AddressForm(request.POST)
+    form = AddressForm(request.POST,initial=initial1)
     if form.is_valid():
         address = form.save(commit=False)
         address.user = request.user
