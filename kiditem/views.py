@@ -93,7 +93,7 @@ def checkout(request, pk):#user.pk =1 or 16
 #def checkout(request):#user.pk =1 or 16 
     user = User.objects.get(pk=pk)#user david 1111 objects
     order = Order.objects.filter(user=user)
-
+    address = Address.objects.all()
     categories = Category.objects.all()
 
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
