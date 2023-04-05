@@ -97,8 +97,8 @@ def checkout(request, pk):#user.pk =1 or 16
     categories = Category.objects.all()
 
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
-           
-    initial1 = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}
+    initial1 = {'street_address': Address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}       
+    #initial1 = {'street_address': 'a', 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}
     #form = AddressForm(request.POST, initial=initial)
     form = AddressForm(request.POST)
     if form.is_valid():
