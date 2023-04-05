@@ -98,7 +98,7 @@ def checkout(request, pk):#user.pk =1 or 16
 
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
            
-    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}
+    initial1 = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}
     #form = AddressForm(request.POST, initial=initial)
     form = AddressForm(request.POST)
     if form.is_valid():
@@ -114,7 +114,7 @@ def checkout(request, pk):#user.pk =1 or 16
         return redirect(request, 'OLDcheckout.html')
 
     else:
-        form = AddressForm(initial=initial)
+        form = AddressForm(initial=initial1)
         context = {'user': user, 'order': order, 'categories': categories}
             #context = {'product':product}
     return render(request, 'checkout.html', context, {'form':form})
