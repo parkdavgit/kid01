@@ -20,7 +20,7 @@
         <table class="table"><tr><td>
 
 
-        <form action="" method="POST"> 
+        <form action="{% url 'checkout' user.pk %}", method="POST">
         {% csrf_token %}    
         <table class="table">
 
