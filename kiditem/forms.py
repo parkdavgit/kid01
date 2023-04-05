@@ -20,7 +20,7 @@ class AddressForm(forms.ModelForm):
         model = Address
         fields = ['street_address', 'apartment_address', 'zip', 'address_type']
         widgets = {
-            'street_address': forms.TextInput(attrs={'readonly': 'readonly'}),
+            'street_address': forms.TextInput(),
             'apartment_address': forms.TextInput(),
             #'country': forms.CountryField(multiple=False),
             #'country': forms.CountryField(multiple=False),
