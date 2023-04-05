@@ -91,14 +91,14 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
         
 def checkout(request, pk):#user.pk =1 or 16
 #def checkout(request):#user.pk =1 or 16 
-    user = request.user#david
+    user = User.objects.get(pk=pk)#user david 1111 objects
     order = Order.objects.filter(user=user)
 
     categories = Category.objects.all()
 
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
            
-    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}#
+    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}
     #form = AddressForm(request.POST, initial=initial)
     form = AddressForm(request.POST)
     if form.is_valid():
@@ -114,7 +114,7 @@ def checkout(request, pk):#user.pk =1 or 16
         return redirect(request, 'OLDcheckout.html')
 
     else:
-        form = AddressForm()
+        form = AddressForm(initial=initial)
         context = {'user': user, 'order': order, 'categories': categories}
             #context = {'product':product}
     return render(request, 'checkout.html', context, {'form':form})
