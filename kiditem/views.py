@@ -80,8 +80,8 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
                 order.number=1234
                 
                 order.save()
-                return redirect('Norder_list', user.pk)
-
+                return redirect('Norder_list')
+                #return redirect('Norder_list', user.pk)
             else:
                 form = OrderForm(initial=initial)
 
