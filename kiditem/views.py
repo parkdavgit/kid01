@@ -130,7 +130,8 @@ def cart(request, pk):#user.pk =1 or 16
 def Norder_list(request):
 #def Norder_list(request, pk):    
     categories = Category.objects.all()
-    user = User.objects.get(pk=pk)
+    #user = User.objects.get(pk=pk)
+    user = request.user
     orders = Order.objects.filter(user=user)
     paginator = Paginator(orders, 5)
     page = request.GET.get('page')
