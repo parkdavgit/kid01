@@ -90,7 +90,7 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             return render(request, 'Norder_list.html', context)
         
 #def checkout(request, pk):#user.pk =1 or 16
-def checkout(request, pk):#user.pk =1 or 16
+def checkout(request):#user.pk =1 or 16
     cart = Cart(request) 
     if request.method == 'POST':
         street_address = request.POST.get('street_address')
@@ -127,7 +127,8 @@ def cart(request, pk):#user.pk =1 or 16
     context = {'user': user, 'cart': cart, 'categories': categories}
     return render(request, 'cart.html', context)
 
-def Norder_list(request, pk):
+def Norder_list(request):
+#def Norder_list(request, pk):    
     categories = Category.objects.all()
     user = User.objects.get(pk=pk)
     orders = Order.objects.filter(user=user)
