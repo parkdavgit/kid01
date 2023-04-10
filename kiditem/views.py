@@ -89,38 +89,27 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             #context = {'product':product}
             return render(request, 'Norder_list.html', context)
         
-def checkout(request, pk):#user.pk =1 or 16
-#def checkout(request):#user.pk =1 or 16 
-    user = User.objects.get(pk=pk)#user david 1111 objects
-    order = Order.objects.filter(user=user)
-    address = Address.objects.filter(user=user)
-    categories = Category.objects.all()
-
-    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'country': address.country,'zip': address.zip,'address_type': address.address_type}#
-    #initial1 = {'street_address': Address.street_address, 'apartment_address': Address.apartment_address, 'zip': Address.zip,'address_type': Address.address_type}       
-    #initial1 = {'street_address': 'a', 'apartment_address': address.apartment_address, 'zip': address.zip,'address_type': address.address_type}
-    #form = AddressForm(request.POST, initial=initial)
-    form = AddressForm(request.POST)
-    if form.is_valid():
-        address = form.save(commit=False)
-        address.user = request.user
-        address.street_address = request.street_address
-        address.apartment_address = request.apartment_address
+#def checkout(request, pk):#user.pk =1 or 16
+def checkout(request):#user.pk =1 or 16
+    cart = Cart(request) 
+    if request.method == 'POST':
+        street_address = request.POST.get('street_address')
+        apartment_address = request.POST.get('apartment_address')
        #address.country = request.country
-        address.zip = request.zip
-        address.address_type=request.address_type
+        zip = request.POST.get('zip')
+        address_type=request.POST.get('address_type')
         #address.save()
-        form.save()
-        return redirect(request, 'OLDcheckout.html')
+        address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
+        for item in cart :
+            products = item['products']
+            quantity=item['quantity']
+            price=products.price*quantity
+            item=Order.object.create(address=address, products=products, price=price, quantity=quantity )
 
-    else:
-        form = AddressForm()
-        context = {'user': user, 'order': order, 'categories': categories}
-            #context = {'product':product}
-    #return render(request, 'checkout.html', context, {'form':form})
-    #return render(request, 'checkout.html', context)
-    return render(request, 'checkout.html', {'form':form})
-
+        
+        return render(request, 'Norder_list.html')
+    
+    return render(request, 'checkout.html')
 
 
 def cart(request, pk):#user.pk =1 or 16
