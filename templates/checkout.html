@@ -16,8 +16,8 @@
                 
         </div>
 
-        <form action="{% url 'checkout', pk %}", method="POST">
-
+        #<form action="{% url 'checkout', pk %}", method="POST">
+        <form method="POST" class="content">      
         {% csrf_token %}  
         
 
@@ -41,16 +41,17 @@
                 <input type=”text” name="zip">
             </div>
         </div>
-        <div class=”section-4″>
+        <!--<div class=”section-4″>
             <div class=”items”>
                 <label class=”label”>address_type</label>
                 <input type=”text” name="address_type">
             </div>
-        </div>    
+        </div> -->   
 
         
-
-        <input type="submit" class="btn btn-primary float-right" value="CHECKOUT ">
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+        <!--<input type="submit" class="btn btn-primary float-right" value="CHECKOUT ">-->
     
         </form>    
                
