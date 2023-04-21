@@ -94,10 +94,10 @@ def checkout(request):#user.pk =1 or 16
     user = request.user
     order = Order.objects.get(user=request.user)
     address= Address.objects.get(user=request.user)
-    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
+    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
 
     if request.method == 'POST':
-        form = AddressForm(request.POST, initial=initial)
+        form = AddressForm(request.POST)
         if form.is_valid():
             street_address = request.POST.get('street_address')
             apartment_address = request.POST.get('apartment_address')
@@ -108,10 +108,10 @@ def checkout(request):#user.pk =1 or 16
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
             return redirect('checkout')       
         else:
-            form = AddressForm(initial=initial)
+            form = AddressForm()
         context = {'user': user, 'order': order}
             #context = {'product':product}
-        return render(request, 'checkout.html', context)
+        return render(request, 'checkout.html', {'form':form})
 
 
 def cart(request, pk):#user.pk =1 or 16
