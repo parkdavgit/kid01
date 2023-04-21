@@ -97,17 +97,22 @@ def checkout(request):#user.pk =1 or 16
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
 
     if request.method == 'POST':
-        address= Address.objects.get(user=request.user)
+        #address= Address.objects.get(user=request.user)
         form = AddressForm(request.POST)
         if form.is_valid():
-            street_address = request.POST.get('street_address')
-            apartment_address = request.POST.get('apartment_address')
+            address= Address()
+            address.street_address = form.cleaned_data['street_address']
+            address.apartment_address = form.cleaned_data['apartment_address']
+            address.zip = form.cleaned_data['zip']
+            #street_address = request.POST.get('street_address')
+
+            #apartment_address = request.POST.get('apartment_address')
        #address.country = request.country
-            zip = request.POST.get('zip')
+            #zip = request.POST.get('zip')
         #address_type=request.POST.get('address_type')
             address.save()
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
-            return redirect('checkout')       
+            return redirect('index')       
         else:
             form = AddressForm()
         context = {'user': user, 'order': order}
@@ -130,11 +135,11 @@ def cart(request, pk):#user.pk =1 or 16
     context = {'user': user, 'cart': cart, 'categories': categories}
     return render(request, 'cart.html', context)
 
-def Norder_list(request):
-#def Norder_list(request, pk):    
+#def Norder_list(request):
+def Norder_list(request, pk):    
     categories = Category.objects.all()
-    #user = User.objects.get(pk=pk)
-    user = request.user
+    user = User.objects.get(pk=pk)
+    #user = request.user
     orders = Order.objects.filter(user=user)
     paginator = Paginator(orders, 5)
     page = request.GET.get('page')
@@ -166,6 +171,37 @@ def delete_cart(request, pk): #user.pk =1 or 16 david
             cart = Cart.objects.filter(user=user, products__in=product)
             cart.delete()
             return redirect('cart', user.pk)
+        
+def delete_order(request, pk): #user.pk =1 or 16 david
+    
+    user = request.user#david
+    order = Order.objects.filter(user=user)#
+    quantity = 0
+
+    if request.method == 'POST':
+     
+        pk =int(request.POST.get('product'))
+        product = Product.objects.get(pk=pk)
+        for i in order:
+            if i.products == product :
+                quantity =  i.quantity
+
+        if quantity > 0 :
+            product = Product.objects.filter(pk=pk)
+            order = Order.objects.filter(user=user, products__in=product)
+            order.delete()
+            return redirect('Norder_list', user.pk)
+
+
+
+
+
+
+
+
+
+
+
         
 
 def show_category(request, category_id):#category_id는 index에서 받아 온 숫자를 URLS에서 할당함 여기서 1 

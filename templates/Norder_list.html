@@ -23,6 +23,9 @@
                     <span>주문 상품 정보</span>
                 </h3>
         </div> 
+
+        <form action="{% url 'delete_order' user.pk %}" method="POST">
+
         <div class="container my-3">    
             <table class="table">
                 <thead class="thead-dark">
@@ -76,6 +79,23 @@
         
         <!-- pagenation nav -->
         {% include 'includes/paginator.html' %}
+
+        <div class="container my-3">
+            <table class="table">
+                <thead class="thead-dark">
+                            <tr><td>선택 상품을<button type="submit" name="delete_order" value="delete_order">삭제하기</button>
+                                {% csrf_token %}
+
+                            </td>
+                            
+
+                </tr></thead></table>
+            </div>
+
+
+
+
+
 
         <div class="container my-3">
           <table class="table">
