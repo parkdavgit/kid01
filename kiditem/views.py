@@ -91,23 +91,27 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
         
 #def checkout(request, pk):#user.pk =1 or 16
 def checkout(request):#user.pk =1 or 16
+    user = request.user
     order = Order.objects.get(user=request.user)
     address= Address.objects.get(user=request.user)
     initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
 
     if request.method == 'POST':
         form = AddressForm(request.POST, initial=initial)
-        street_address = request.POST.get('street_address')
-        apartment_address = request.POST.get('apartment_address')
+        if form.is_valid():
+            street_address = request.POST.get('street_address')
+            apartment_address = request.POST.get('apartment_address')
        #address.country = request.country
-        zip = request.POST.get('zip')
+            zip = request.POST.get('zip')
         #address_type=request.POST.get('address_type')
-        address.save()
+            address.save()
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
-               
-        #return render(request, 'Norder_list.html')
-    
-    return render(request, 'checkout.html')
+            return redirect('checkout')       
+        else:
+            form = AddressForm(initial=initial)
+        context = {'user': user, 'order': order}
+            #context = {'product':product}
+        return render(request, 'checkout.html', context)
 
 
 def cart(request, pk):#user.pk =1 or 16

@@ -16,8 +16,8 @@
                 
         </div>
 
-        #<form action="{% url 'checkout' %}", method="POST">
-        <form method="POST" class="content">      
+        <form action="{% url 'checkout' %}", method="POST">
+        <!--<form method="POST" class="content">-->       
         {% csrf_token %}  
         
 
@@ -49,13 +49,22 @@
         </div> -->   
 
         
-        <hr class="mb-4">
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-        <!--<input type="submit" class="btn btn-primary float-right" value="CHECKOUT ">-->
+        
+
     
-        </form>    
-               
-    </div>
+
+
+    <hr class="mb-4">
+    <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+    <!--<input type="submit" class="btn btn-primary float-right" value="CHECKOUT ">-->
+
+    </form>    
+           
+</div>
+
+
+
+
 
         
         <!-- pagenation nav 
