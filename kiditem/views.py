@@ -112,7 +112,7 @@ def checkout(request):#user.pk =1 or 16
         #address_type=request.POST.get('address_type')
             address.save()
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
-            return HttpResponseRedirect('Norder_list')
+            return HttpResponseRedirect('Norder_list', user.pk)
             #return redirect('Norder_list', user.pk)       
         else:
             form = AddressForm()
