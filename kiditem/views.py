@@ -89,11 +89,10 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             #context = {'product':product}
             return render(request, 'Norder_list.html', context)
         
-def checkout(request):#user.pk =1 or 16
+def checkout(request, pk):#user.pk =1 or 16
 #def checkout(request):#user.pk =1 or 16
-    user = request.user
-    print(user)
-    order = Order.objects.get(user=request.user)
+    user = User.objects.get(pk=pk)
+    order = Order.objects.get(user=user)
     
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
 
