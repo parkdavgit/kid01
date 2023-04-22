@@ -92,6 +92,7 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
 def checkout(request):#user.pk =1 or 16
 #def checkout(request):#user.pk =1 or 16
     user = request.user
+    print(user)
     order = Order.objects.get(user=request.user)
     
     #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
@@ -119,7 +120,7 @@ def checkout(request):#user.pk =1 or 16
             form = AddressForm()
             context = {'user': user, 'order': order}
             #context = {'product':product}
-        return render(request, 'checkout.html', {'form':form})
+        return render(request, 'checkout.html', context, {'form':form})
         #return render(request, 'checkout.html', context)
         
 
