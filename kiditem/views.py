@@ -93,17 +93,20 @@ def checkout(request, pk):#user.pk =1 or 16
 #def checkout(request):#user.pk =1 or 16
     user = User.objects.get(pk=pk)
     order = Order.objects.get(user=user)
-    
-    #initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
+    address= Address.objects.get(user=user)
+    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
 
     if request.method == 'POST':
         #address= Address.objects.get(user=request.user)
-        form = AddressForm(request.POST)
+        form = AddressForm(request.POST, initial=initial)
         if form.is_valid():
-            address= Address()
-            address.street_address = form.cleaned_data['street_address']
-            address.apartment_address = form.cleaned_data['apartment_address']
-            address.zip = form.cleaned_data['zip']
+            address = form.save(commit=False)
+            address.user = request.user    
+            
+            #address= Address()
+            #address.street_address = form.cleaned_data['street_address']
+            #address.apartment_address = form.cleaned_data['apartment_address']
+            #address.zip = form.cleaned_data['zip']
             #street_address = request.POST.get('street_address')
 
             #apartment_address = request.POST.get('apartment_address')
@@ -116,11 +119,12 @@ def checkout(request, pk):#user.pk =1 or 16
             return redirect('Norder_list', user.pk) 
               
         else:
-            form = AddressForm()
+            form = AddressForm(initial=initial)
+            #form = AddressForm()
             context = {'user': user, 'order': order}
             #context = {'product':product}
-        return render(request, 'checkout.html', context, {'form':form})
-        #return render(request, 'checkout.html', context)
+        #return render(request, 'checkout.html', context, {'form':form})
+        return render(request, 'checkout.html', context)
         
 
 def cart(request, pk):#user.pk =1 or 16
