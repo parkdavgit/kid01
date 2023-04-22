@@ -101,7 +101,7 @@ def checkout(request, pk):#user.pk =1 or 16
         form = AddressForm(request.POST, initial=initial)
         if form.is_valid():
             address = form.save(commit=False)
-            address.user = request.user    
+            address.user = user    
             
             #address= Address()
             #address.street_address = form.cleaned_data['street_address']
