@@ -119,8 +119,8 @@ def checkout(request):#user.pk =1 or 16
             form = AddressForm()
             context = {'user': user, 'order': order}
             #context = {'product':product}
-        #return render(request, 'checkout.html', {'form':form})
-        return render(request, 'checkout.html', context)
+        return render(request, 'checkout.html', {'form':form})
+        #return render(request, 'checkout.html', context)
         
 
 def cart(request, pk):#user.pk =1 or 16
