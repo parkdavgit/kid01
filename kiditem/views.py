@@ -80,8 +80,8 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
                 order.number=1234
                 
                 order.save()
-                return redirect('Norder_list')
-                #return redirect('Norder_list', user.pk)
+                #return redirect('Norder_list')
+                return redirect('Norder_list', user.pk)
             else:
                 form = OrderForm(initial=initial)
 
@@ -89,9 +89,10 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             #context = {'product':product}
             return render(request, 'Norder_list.html', context)
         
-def checkout(request, pk):#user.pk =1 or 16
+def checkout(request):#user.pk =1 or 16
 #def checkout(request):#user.pk =1 or 16
-    user = User.objects.get(pk=pk)
+    #user = User.objects.get(pk=pk)
+    user = request.user
     order = Order.objects.get(user=user)
     address= Address.objects.get(user=user)
     initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
@@ -116,7 +117,7 @@ def checkout(request, pk):#user.pk =1 or 16
             address.save()
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
             #return HttpResponseRedirect('index')
-            return redirect('Norder_list', user.pk) 
+            return redirect('Norder_list', user.pk)
               
         else:
             form = AddressForm(initial=initial)
