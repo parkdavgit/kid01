@@ -138,6 +138,7 @@ def cart(request, pk):#user.pk =1 or 16
 #def Norder_list(request):
 def Norder_list(request, pk):    
     categories = Category.objects.all()
+    product = Product.objects.all()
     user = User.objects.get(pk=pk)
     #user = request.user
     orders = Order.objects.filter(user=user)
@@ -149,7 +150,7 @@ def Norder_list(request, pk):
         orders = paginator.page(1)
     except EmptyPage:
         orders = paginator.page(paginator.num_pages)
-    context = {'user': user, 'orders': orders, 'categories': categories}
+    context = {'user': user, 'orders': orders, 'categories': categories, 'product': product }
     return render(request, 'Norder_list.html', context) 
 
 def delete_cart(request, pk): #user.pk =1 or 16 david
