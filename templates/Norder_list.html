@@ -30,6 +30,9 @@
             <table class="table">
                 <thead class="thead-dark">
                 <tr>
+                    <th class="thumb">
+                        SELECT
+                    </th>
                     <th class="date">
                         ORDER-DATE
                     </th>
@@ -50,7 +53,10 @@
                 <tbody>
                 
                 {% for i in orders %}
-                    <tr>
+                    <tr><td>
+                        <input type="radio" id="product_{{ product.id }}" name="product" value="{{ product.products.id }}">                                 
+                    </td>
+
                         <td class="date">
                             {{ i.order_date }}
                         </td>
