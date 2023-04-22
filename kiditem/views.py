@@ -182,16 +182,18 @@ def delete_order(request, pk): #user.pk =1 or 16 david
     if request.method == 'POST':
      
         pk =int(request.POST.get('order_product'))
-        product = Product.objects.get(pk=pk)
-        for i in order:
-            if i.products == product :
-                quantity =  i.quantity
+        order = Order.objects.get(pk=pk)
+        order.delete()
+        return redirect('Norder_list', user.pk)
+        #for i in order:
+            #if i.products == product :
+                #quantity =  i.quantity
 
-        if quantity > 0 :
-            product = Product.objects.filter(pk=pk)
-            order = Order.objects.filter(user=user, products__in=product)
-            order.delete()
-            return redirect('Norder_list', user.pk)
+        #if quantity > 0 :
+            #product = Product.objects.filter(pk=pk)
+            #order = Order.objects.filter(user=user, products__in=product)
+            #order.delete()
+            #return redirect('Norder_list', user.pk)
 
 
 
