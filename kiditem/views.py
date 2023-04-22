@@ -113,14 +113,15 @@ def checkout(request):#user.pk =1 or 16
             address.save()
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
             #return HttpResponseRedirect('index')
-            #return redirect('Norder_list', user.pk) 
-            return render(request, 'checkout.html')#       
+            return redirect('Norder_list', user.pk) 
+              
         else:
             form = AddressForm()
-        context = {'user': user, 'order': order}
+            context = {'user': user, 'order': order}
             #context = {'product':product}
-        return render(request, 'checkout.html', {'form':form})
-
+        #return render(request, 'checkout.html', {'form':form})
+        return render(request, 'checkout.html', context)
+        
 
 def cart(request, pk):#user.pk =1 or 16
     categories = Category.objects.all()
