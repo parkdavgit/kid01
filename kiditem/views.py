@@ -9,6 +9,7 @@ from .models import Product,Category,Point, Cart, Order, Post , Address
 from django.utils import timezone
 from .forms import OrderForm, AddressForm
 from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 def index(request):
     products = Product.objects.all()
@@ -117,8 +118,8 @@ def address(request,pk):#user.pk =1 or 16
         #address_type=request.POST.get('address_type')
             address.save()
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
-            #return HttpResponseRedirect('index')
-            return redirect('Norder_list', user.pk)
+            return HttpResponseRedirect(reverse('index'))
+            #return redirect('Norder_list', user.pk)
               
         else:
             form = AddressForm(initial=initial)
