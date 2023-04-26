@@ -94,8 +94,9 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
 #def checkout(request):#user.pk =1 or 16
 def address(request,pk):#user.pk =1 or 16
     #user = User.objects.get(pk=pk)
-    user = request.user
-    #order = Order.objects.get(user=user)
+    user = User.objects.get(pk=pk)
+    #user = request.user
+    order = Order.objects.get(user=user)
     address= Address.objects.get(user=user)
     initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
 
@@ -103,13 +104,13 @@ def address(request,pk):#user.pk =1 or 16
         #address= Address.objects.get(user=request.user)
         form = AddressForm(request.POST, initial=initial)
         if form.is_valid():
-            #address = form.save(commit=False)
+            address = form.save(commit=False)
             address.user = request.user   
             
             #address= Address()
-            address.street_address = form.cleaned_data['street_address']
-            address.apartment_address = form.cleaned_data['apartment_address']
-            address.zip = form.cleaned_data['zip']
+            #address.street_address = form.cleaned_data['street_address']
+            #address.apartment_address = form.cleaned_data['apartment_address']
+            #address.zip = form.cleaned_data['zip']
             #street_address = request.POST.get('street_address')
 
             #apartment_address = request.POST.get('apartment_address')
@@ -118,15 +119,15 @@ def address(request,pk):#user.pk =1 or 16
         #address_type=request.POST.get('address_type')
             address.save()
         #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
-            return HttpResponseRedirect(reverse('index'))
-            #return redirect('Norder_list', user.pk)
+            #return HttpResponseRedirect(reverse('index'))
+            return redirect('Norder_list', user.pk)
               
         else:
             form = AddressForm(initial=initial)
             #form = AddressForm()
-            #context = {'user': user, 'order': order}
+            context = {'user': user, 'order': order, 'form':form}
             #context = {'product':product}
-            context = {'user': user}
+            #context = {'user': user}
         #return render(request, 'checkout.html', context, {'form':form})
         return render(request, 'address.html', context)
         
