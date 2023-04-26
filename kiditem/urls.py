@@ -16,7 +16,7 @@ urlpatterns = [
     url(r'^Norder_list/(?P<pk>[0-9]+)/$', views.Norder_list, name='Norder_list'),
     url(r'^cart/(?P<pk>[0-9]+)/delete', views.delete_cart, name='delete_cart'),
     url(r'^(?P<category_id>[0-9]+)/$', views.show_category, name='show_category'),
-    #url(r'^address/(?P<pk>[0-9]+)/$', views.address, name='address'),
-    url(r'^address/$', views.address, name='address'), 
+    url(r'^address/(?P<pk>[0-9]+)/$', views.address, name='address'),
+    #url(r'^address/$', views.address, name='address'), 
     url(r'^order/(?P<pk>[0-9]+)/delete', views.delete_order, name='delete_order'), 
 ]    

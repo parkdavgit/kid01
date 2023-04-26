@@ -125,7 +125,7 @@ def address(request,pk):#user.pk =1 or 16
         else:
             form = AddressForm(initial=initial)
             #form = AddressForm()
-            context = {'user': user, 'order': order, 'form':form}
+            context = {'user': user, 'form':form}
             #context = {'product':product}
             #context = {'user': user}
         #return render(request, 'checkout.html', context, {'form':form})
