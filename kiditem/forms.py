@@ -28,8 +28,3 @@ class AddressForm(forms.ModelForm):
             #'address_type': forms.TextInput(),
         }
 
-class AddressForm(forms.Form):
-    street_address=forms.CharField(max_length=100)
-    apartment_address = forms.CharField(max_length=100)
-    zip = forms.CharField(max_length=100)
-    

@@ -91,44 +91,21 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             return render(request, 'Norder_list.html', context)
 
 @login_required        
-#def checkout(request):#user.pk =1 or 16
 def address(request,pk):#user.pk =1 or 16
-    #user = User.objects.get(pk=pk)
-    user = User.objects.get(pk=pk)
-    #user = request.user
-    order = Order.objects.get(user=user)
-    address= Address.objects.get(user=user)
-    initial = {'street_address': address.street_address, 'apartment_address': address.apartment_address, 'zip': address.zip}
-
+    user = request.user
     if request.method == 'POST':
-        #address= Address.objects.get(user=request.user)
-        form = AddressForm(request.POST, initial=initial)
+        form = AddressForm(request.POST)
         if form.is_valid():
             address = form.save(commit=False)
-            address.user = request.user   
-            
-            #address= Address()
-            #address.street_address = form.cleaned_data['street_address']
-            #address.apartment_address = form.cleaned_data['apartment_address']
-            #address.zip = form.cleaned_data['zip']
-            #street_address = request.POST.get('street_address')
-
-            #apartment_address = request.POST.get('apartment_address')
-       #address.country = request.country
-            #zip = request.POST.get('zip')
-        #address_type=request.POST.get('address_type')
+            address.user = user   
             address.save()
-        #address= Address.objects.create(user=request.user, street_address=street_address, apartment_address=apartment_address,zip=zip,address_type=address_type)
-            #return HttpResponseRedirect(reverse('index'))
             return redirect('Norder_list', user.pk)
               
         else:
-            form = AddressForm(initial=initial)
-            #form = AddressForm()
-            context = {'user': user, 'form':form}
-            #context = {'product':product}
-            #context = {'user': user}
-        #return render(request, 'checkout.html', context, {'form':form})
+            return HttpResponseRedirect('index')
+    else:
+        form = AddressForm()
+        context = {'user': user, 'form':form}
         return render(request, 'address.html', context)
         
 
@@ -147,7 +124,7 @@ def cart(request, pk):#user.pk =1 or 16
     context = {'user': user, 'cart': cart, 'categories': categories}
     return render(request, 'cart.html', context)
 
-#def Norder_list(request):
+
 def Norder_list(request, pk):    
     categories = Category.objects.all()
     product = Product.objects.all()

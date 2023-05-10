@@ -15,62 +15,24 @@
                     </h2>
                 
         </div>
-        <form action="", method="POST">
-        <!--<form action="{% url 'checkout' %}", method="POST">-->  
-        <!--<form method="POST" class="content">-->      
+        <form method="POST" class="content">
         {% csrf_token %}  
-         <table class="table">
+        <table class="table">
         {{form.as_table}}
         </table>
     
         
-        <!--<div class=”section-1″>
-            <div class=”items”>
-              <label class=”label”>street_address</label>
-              <input type=”text” name="street_address">
-             </div>
-          </div>
-        <div class=”section-2″>
-            <div class=”items”>
-                <label class=”label”>aptment_address</label>
-                <input type=”text” name="aptment_address">
-            </div>
-        </div>
-        <div class=”section-3″>
-            <div class=”items”>
-                <label class=”label”>zip</label>
-                <input type=”text” name="zip">
-            </div>
-        </div>-->    
-        <!--<div class=”section-4″>
-            <div class=”items”>
-                <label class=”label”>address_type</label>
-                <input type=”text” name="address_type">
-            </div>
-        </div> -->   
-
-        
+              
         
 
     
 
 
         <hr class="mb-4">
-    <!--<button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-        <input type="submit" class="btn btn-primary float-right" value="address ">-->
         <button type="submit" name="address" value="address">Address</button>
         </form>    
-           
+         
 </div>
-
-
-
-
-
-        
-        <!-- pagenation nav 
-        #{% include 'includes/paginator.html' %}-->
-
-        
+      
       
 {% endblock %}
