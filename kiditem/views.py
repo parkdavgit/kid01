@@ -194,7 +194,7 @@ def buythis(request,pk):#user.pk =1 or 16
        
         io = Order.objects.create(user=user, products=i.products, quantity=i.quantity, order_date=timezone.now(), name='name',number='1', amount='2')
     io.save()
-    return redirect('shop:Norder_list', user.pk)  
+    return redirect('Norder_list', user.pk)  
 
 
 
