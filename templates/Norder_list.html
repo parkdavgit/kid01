@@ -17,8 +17,7 @@
                     </h2>
                 
         </div>
-        <form action="#">
-
+        
         <div class="container my-3">
              
                 <h3>
@@ -75,34 +74,20 @@
                 {% endfor %}
                 </tbody>
             </table>
-
-           
+                
         <div class="container my-3">
             <table class="table">
-            
-        
-            <tbody>
-                <tr><td>선택 상품을<button type="submit" name="delete_order" value="delete_order">삭제하기</button>
-                    {% csrf_token %}
+            <tr><td><td><a class='btn btn-primary float-right' href="{% url 'address' user.pk  %}">ADDRESS/a> 
+            </td>
+            </tr></table>
+        </div>  
+        <div class="container my-3">
+            <table class="table">
+            <tr><td><td><a class='btn btn-primary float-right' href="#">PAYMENT</a> 
+            </td>
+            </tr></table>
+        </div>  
 
-                </td>
-                </tr>    
-                                
-           
-            <tr><td> <a href="#">Address update</a> 
-                        </td>               
-            </tr>    
-                
-            <tr><td> <a href="#">PAYMENT</a> 
-            </td>               
-            </tr> 
-        
-        
-            </tbody>
-            </table>
-        </div> 
-
-        </form>
 
     </div>
 
