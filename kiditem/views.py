@@ -185,7 +185,16 @@ def delete_order(request, pk): #user.pk =1 or 16 david
             #return redirect('Norder_list', user.pk)
 
 
-
+@login_required        
+def buythis(request,pk):#user.pk =1 or 16
+    user = request.user
+    cart = Cart.objects.filter(user=user)
+    orders = Order.objects.filter(user=user)
+    for i in cart:
+       
+        io = Order.objects.create(user=user, products=i.products, quantity=i.quantity, order_date=timezone.now(), name='name',number='1', amount='2')
+    io.save()
+    return redirect('shop:Norder_list', user.pk)  
 
 
 

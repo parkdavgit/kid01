@@ -17,19 +17,22 @@
                     </h2>
                 
         </div>
-        <form action="#">
-
-        <div class="container my-3">
+        <div id="order_list">
              
                 <h3>
                     <span>주문 상품 정보</span>
                 </h3>
-             
+        </div> 
+
+        <form action="{% url 'delete_order' user.pk %}" method="POST">
+
+        <div class="container my-3">    
             <table class="table">
                 <thead class="thead-dark">
-                <tr><th class="thumb">
-                    SELECT
-                </th>
+                <tr>
+                    <th class="thumb">
+                        SELECT
+                    </th>
                     <th class="date">
                         ORDER-DATE
                     </th>
@@ -49,65 +52,69 @@
                 </thead>
                 <tbody>
                 
-                {% for product in orders %}
+                {% for i in orders %}
                     <tr><td>
-                        <input type="radio" id="product_{{ product.id }}" name="product" value="{{ product.products.id }}">                                 
+                        <input type="radio" id="order_{{ order.id }}" name="order_product" value="{{ i.id }}">                                 
                     </td>
+
                         <td class="date">
-                            {{ product.order_date }}
+                            {{ i.order_date }}
                         </td>
                         <td class="thumb">
-                            {% thumbnail product.products.image "100x100" crop="center" as im %}
+                            {% thumbnail i.products.image "100x100" crop="center" as im %}
                                 <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" alt="{{ im.name }}">
                             {% endthumbnail %}
                         </td>
                         <td class="product">
-                            {{ product.products.name }}
+                            {{ i.products.name }}
                         </td>
                         <td class="quantity">
-                            {{ product.quantity }}
+                            {{ i.quantity }}
                         </td> 
-                        
+                                     
                         <td>
-                            {{ product.amount }}
+                            {{ i.amount }}
                         </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
 
-           
-        <div class="container my-3">
-            <table class="table">
-            
+        </div>
+
         
-            <tbody>
-                <tr><td>선택 상품을<button type="submit" name="delete_order" value="delete_order">삭제하기</button>
-                    {% csrf_token %}
-
-                </td>
-                </tr>    
-                                
-           
-            <tr><td> <a href="#">Address update</a> 
-                        </td>               
-            </tr>    
-                
-            <tr><td> <a href="#">PAYMENT</a> 
-            </td>               
-            </tr> 
-        
-        
-            </tbody>
-            </table>
-        </div> 
-
-        </form>
-
-    </div>
-
-  
         <!-- pagenation nav -->
         {% include 'includes/paginator.html' %}
+
+        <div class="container my-3">
+            <table class="table">
+                <thead class="thead-dark">
+                            <tr><td>선택 상품을<button type="submit" name="delete_order" value="delete_order">삭제하기</button>
+                                {% csrf_token %}
+
+                            </td>
+                            
+
+                </tr></thead></table>
+            </div>
+
+
+
+
+
+
+        <div class="container my-3">
+          <table class="table">
+          <tr><td> 
+          <tr><td> <a href="{% url 'address' user.pk %}">Address update</a>
+              </td>               
+          </tr>
+          
+        </table>
+        </div>  
+
+
+
+
        
 {% endblock %}
