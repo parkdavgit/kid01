@@ -97,7 +97,7 @@ def address(request,pk):#user.pk =1 or 16
     for i in address :
         if i.user == user:
             
-            return redirect('shop:Norder_list', user.pk)
+            return redirect('Norder_list', user.pk)
 
     if request.method == 'POST':
     
