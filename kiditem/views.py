@@ -93,10 +93,12 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
 @login_required        
 def address(request,pk):#user.pk =1 or 16
     user = request.user
-    address = Address.objects.filter(User=user)#
-    if address.user == user:
-        return redirect('Norder_list', user.pk)   
-    
+    address = Address.objects.all()
+    for i in address :
+        if i.user == user:
+            
+            return redirect('shop:Norder_list', user.pk)
+
     if request.method == 'POST':
     
         form = AddressForm(request.POST)
