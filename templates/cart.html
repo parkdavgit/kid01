@@ -92,16 +92,12 @@
         <div class="container my-3">
             <table class="table">
             <tr><td>  <a class='btn btn-primary float-right' href='/'>Continue shopping</a>
+                </td><td><a class='btn btn-primary float-right' href="{% url 'buythis' user.pk  %}">CHECKOUT</a> 
                 </td>               
             </tr></table>
         </div>  
            
-        <div class="container my-3">
-            <table class="table">
-            <tr><td><td><a class='btn btn-primary float-right' href="{% url 'buythis' user.pk  %}">CHECKOUT</a> 
-            </td>
-            </tr></table>
-        </div>  
+        
 
     </div>
     {% endblock contents %}
