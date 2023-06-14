@@ -25,7 +25,7 @@ urlpatterns = [
     path('', include('kiditem.urls')), ## 추가된 부분
     path('admin/', admin.site.urls),
     path('account/',include('account.urls')), ## 추가된 부분
-   
+    path('accounts/', include('allauth.urls')),
      
 ]  
 
