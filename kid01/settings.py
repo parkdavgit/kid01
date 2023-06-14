@@ -39,9 +39,7 @@ INSTALLED_APPS = [
     'kiditem',
     'sorl.thumbnail',
     'django_countries',
-    'django_extensions',
-    'django.contrib.sites',
-
+    
 ]
 
 
