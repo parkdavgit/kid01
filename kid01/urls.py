@@ -25,8 +25,7 @@ urlpatterns = [
     path('', include('kiditem.urls')), ## 추가된 부분
     path('admin/', admin.site.urls),
     path('account/',include('account.urls')), ## 추가된 부분
-    path('accounts/', include('allauth.urls')),
-     
+        
 ]  
 
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
