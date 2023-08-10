@@ -85,7 +85,7 @@ DATABASES = {
         'NAME': 'ubuntu',
         'User' : 'ubuntu',
         'PASSWORD':'1019', ## 추가된 부분 
-        'HOST':'18.190.111.4', ## 추가된 부분
+        'HOST':'172.31.29.26', ## 추가된 부분
         'PORT': '5432',
     }
 }
