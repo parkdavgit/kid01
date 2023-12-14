@@ -83,19 +83,34 @@ class Order(models.Model):
 
 
 class Address(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE)
-    street_address = models.CharField(max_length=100)
-    apartment_address = models.CharField(max_length=100)
-    #country = CountryField(multiple=False)
-    zip = models.CharField(max_length=100)
-    address_type = models.CharField(max_length=1, choices=ADDRESS_CHOICES)
-    default = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    phone = models.CharField(max_length=50)
+    request = models.TextField(blank=True)
+    sent_date = models.DateField(auto_now_add=True)
+    accepted = models.BooleanField(default=False)
+    accepted_date = models.DateField(auto_now_add=False, null=True, blank=True)
 
     def __str__(self):
-        return self.user.username
+        return self.user.first_name
 
     class Meta:
-        verbose_name_plural = 'Addresses'
+        ordering=["-sent_date"]
 
-    
+class Appointment(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, )
+    name = models.CharField(max_length=100, verbose_name='상품명')
+    amount = models.PositiveIntegerField(verbose_name='결제금액')
+    quantity = models.IntegerField(default=1)
+    products = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_product')
+    order_date = models.DateTimeField(auto_now_add=True)
+    number = models.IntegerField(default=1)#from David
+
+    #모델 인스턴스를 아이디 값 내림차순 정렬
+    class Meta:
+        ordering = ('-id',)
+
+   
