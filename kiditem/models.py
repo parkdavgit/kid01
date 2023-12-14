@@ -82,7 +82,7 @@ class Order(models.Model):
        return '{} by {}'.format(self.products.name, self.user)
 
 
-class Address(models.Model):
+class Appointment(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.CharField(max_length=50)
@@ -98,19 +98,5 @@ class Address(models.Model):
     class Meta:
         ordering=["-sent_date"]
 
-class Appointment(models.Model):
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE, )
-    name = models.CharField(max_length=100, verbose_name='상품명')
-    amount = models.PositiveIntegerField(verbose_name='결제금액')
-    quantity = models.IntegerField(default=1)
-    products = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_product')
-    order_date = models.DateTimeField(auto_now_add=True)
-    number = models.IntegerField(default=1)#from David
-
-    #모델 인스턴스를 아이디 값 내림차순 정렬
-    class Meta:
-        ordering = ('-id',)
 
    
