@@ -5,7 +5,7 @@ from .models import Product, Post, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Product,Category,Point, Cart, Order, Post , Address
+from .models import Product,Category,Point, Cart, Order, Post , Address, Appointment
 from django.utils import timezone
 from .forms import OrderForm, AddressForm
 from django.http import HttpResponseRedirect
@@ -234,3 +234,24 @@ def show_category(request, category_id):#category_id는 index에서 받아 온 �
     return render(request, 'category.html', context)#이런 context를 category.html에서 사용할 거야
 
 
+def appointment(request):
+    if request.method == 'POST':
+        fname=request.POST.get("fname")
+        lname=request.POST.get("lname")
+        email=request.POST.get("email")
+        mobile=request.POST.get("mobile")
+        message=request.POST.get("request")
+
+        appointment=Appointment.objects.create(
+            firstname=fname,
+            lastname=lname,
+            email=email,
+            phone=mobile,
+            request=message,
+        )
+
+        appointment.save()
+
+        messages.add_message(request, messages.SUCCESS, f"Thanks {fname} for making an appointment")
+
+    return redirect('index')        
