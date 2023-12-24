@@ -95,7 +95,7 @@ class Appointment(models.Model):
     accepted_date = models.DateField(auto_now_add=False, null=True, blank=True)
 
     def __str__(self):
-        return self.user.first_name
+        return self.first_name
 
     class Meta:
         ordering=["-sent_date"]
