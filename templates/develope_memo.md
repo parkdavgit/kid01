@@ -120,4 +120,38 @@ Add in index
     {% endfor %}
   </div>
 </div>
-{% endif %}           
+{% endif %}  
+
+2023.12.22
+Add in index
+<!-- Email Contact Form -->
+<div class="container py-5">
+	<h3>Contact</h3>
+
+<form action="/contact/" method="post">
+    
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label><br>
+        <input type="text" name="name" placeholder=""><br>
+      </div>
+    
+    
+    <div class="mb-3">
+        <label for="Email" class="form-label">Email</label><br>
+        <input type="email" name="email" placeholder="">
+        
+    </div>
+    
+    <div class="mb-3">
+        <label for="message" class="form-label">Message</label><br>
+        <textarea name="message" rows="5" placeholder=""></textarea>
+
+        </div>
+
+    <div class="mb-3">    
+        <button type="submit" class="btn btn-primary">Send</button>
+        </div>
+</form>
+</div>
