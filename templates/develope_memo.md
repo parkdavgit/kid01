@@ -126,32 +126,46 @@ Add in index
 Add in index
 <!-- Email Contact Form -->
 <div class="container py-5">
-	<h3>Contact</h3>
 
-<form action="/contact/" method="post">
+<form method="POST" action="{% url 'appointment' %}">
     
-    {% csrf_token %}
+  {% csrf_token %}
 
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label><br>
-        <input type="text" name="name" placeholder=""><br>
-      </div>
-    
-    
-    <div class="mb-3">
-        <label for="Email" class="form-label">Email</label><br>
-        <input type="email" name="email" placeholder="">
-        
-    </div>
-    
-    <div class="mb-3">
-        <label for="message" class="form-label">Message</label><br>
-        <textarea name="message" rows="5" placeholder=""></textarea>
+  
+  <div class="mb-3">
+    <label for="fname" class="form-label">First Name<span class="text-danger">*</span></label><br>
+    <input required type="text" name="fname" placeholder="Enter your First Name"><br>
+  </div>
+  <div class="mb-3">
+    <label for="lname" class="form-label">Last Name<span class="text-danger">*</span></label><br>
+    <input required type="text" name="lname" placeholder="Enter your Last Name"><br>
+  </div>
 
-        </div>
+  <div class="mb-3">
+    <label for="Email" class="form-label">Email</label><br>
+    <input required type="email" name="email" placeholder="Enter your email">
+  </div>
+  <div class="mb-3">
+    <label for="Mobile" class="form-label">Mobile</label><br>
+    <input required type="text" name="mobile" placeholder="Enter your mobile">
+  </div>
+  
+  <div class="mb-3">
+    <label for="message" class="form-label">Message</label><br>
+    <textarea name="request" rows="5" placeholder=""></textarea>
+  </div>
 
-    <div class="mb-3">    
-        <button type="submit" class="btn btn-primary">Send</button>
-        </div>
+  <div class="mb-3">    
+    <button type="submit" class="btn btn-primary">Send</button>
+  </div>
+
 </form>
-</div>
+<div>
+
+2023.12.23 - Book Appointment Complete
+def __str__(self):
+        return self.first_name
+        return self.user.first_name(error - no found user)
+
+2023.12.27 - Manage Appointment
+        
