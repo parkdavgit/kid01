@@ -40,14 +40,21 @@
     {{app.request}}
   </div>
   
-  <hr class ="w-100"> 
+  <hr class ="w-100">
+  {% if app.accepted == False %} 
+  <form method="POST" action="{% url 'manage_appointment' %}">
+  {% csrf_token %}
+  
   <div class="form-group">
     <input type="date" name="date" class="form-control mb-2" placeholder="dd-mm-yyyy" value=" " min="1997-01-01" max="2024-12-31">
     <input class="btn-block btn-primary form-control" type="submit" value="Accept">
   </div>
-
+  </form>
+  {% endif %} 
 
   {% endfor %}
 <div>
-       
+
+
+
 {% endblock contents %} 

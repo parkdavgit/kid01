@@ -167,5 +167,46 @@ def __str__(self):
         return self.first_name
         return self.user.first_name(error - no found user)
 
-2023.12.27 - Manage Appointment
+2023.12.27 - Manage Appointment.html
+<div class="container my-3">
+  <h3>{{title}}</h3>
+</div>
+
+<div class="container py-5">
+  {% for app in appointments %}
+
+  <div class="mb-3">
+    {{app.firstname}}
+  </div>
+  <div class="mb-3">
+    {{app.lastname}}
+  </div>
+  <div class="mb-3">
+    {{app.email}}
+  </div>
+  <div class="mb-3">
+    {{app.phone}}
+  </div>
+  <div class="mb-3">
+    {{app.sent_date}}
+  </div>
+  
+  <div class="mb-3">
+    {{app.request}}
+  </div>
+  
+  <hr class ="w-100"> 
+  <div class="form-group">
+    <input type="date" name="date" class="form-control mb-2" placeholder="dd-mm-yyyy" value=" " min="1997-01-01" max="2024-12-31">
+    <input class="btn-block btn-primary form-control" type="submit" value="Accept">
+  </div>
+
+
+  {% endfor %}
+<div>
+       
+{% endblock contents %} 
+
+
+submit then what?
         
