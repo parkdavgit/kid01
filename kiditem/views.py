@@ -5,7 +5,7 @@ from .models import Product, Post, Category
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Product,Category,Point, Cart, Order, Post , Address, Appointment
+from .models import Product,Category,Point, Cart, Order, Post , Appointment
 from django.utils import timezone
 from .forms import OrderForm, AddressForm
 from django.http import HttpResponseRedirect
@@ -90,31 +90,6 @@ def cart_or_buy(request, pk):#product.pk를 urls통해 pk로 받음 갈비
             #context = {'product':product}
             return render(request, 'Norder_list.html', context)
 
-@login_required        
-def address(request,pk):#user.pk =1 or 16
-    user = request.user
-    address = Address.objects.all()
-    for i in address :
-        if i.user == user:
-            
-            return redirect('Norder_list', user.pk)
-
-    if request.method == 'POST':
-    
-        form = AddressForm(request.POST)
-        if form.is_valid():
-            address = form.save(commit=False)
-            address.user = user   
-            address.save()
-            return redirect('Norder_list', user.pk)
-              
-        else:
-            return HttpResponseRedirect('index')
-    else:
-        form = AddressForm()
-        context = {'user': user, 'form':form}
-        return render(request, 'address.html', context)
-        
 
 def cart(request, pk):#user.pk =1 or 16
     categories = Category.objects.all()
