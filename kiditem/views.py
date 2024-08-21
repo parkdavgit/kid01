@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Product,Category,Point, Cart, Order, Post , Appointment
 from django.utils import timezone
-from .forms import OrderForm, AddressForm
+from .forms import OrderForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
