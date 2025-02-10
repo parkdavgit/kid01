@@ -232,8 +232,3 @@ def appointment(request):
     return redirect('index')        
 
 
-@login_required
-def manage_appointment(request):
-    appointments=Appointment.objects.all()
-    context = {"title": "Manage Appointment", "appointments":  appointments}
-    return render(request, 'manage_appointment.html', context)      
