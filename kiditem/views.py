@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import F
-from .models import Product, Post, Category
+from .models import Product, Post, Category, Address
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Product,Category,Point, Cart, Order, Post , Appointment
 from django.utils import timezone
-from .forms import OrderForm
+from .forms import OrderForm, AddressForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
@@ -178,14 +178,7 @@ def buythis(request,pk):#user.pk =1 or 16
     io.save()
     return redirect('Norder_list', user.pk)  
 
-
-
-
-
-
-
-
-        
+       
 
 def show_category(request, category_id):#category_id는 index에서 받아 온 숫자를 URLS에서 할당함 여기서 1 
     categories = Category.objects.all()#카테로리 전체 한국 일본 중국 요리 전부
@@ -232,3 +225,26 @@ def appointment(request):
     return redirect('index')        
 
 
+@login_required        
+def address(request,pk):#user.pk =1 or 16
+    user = request.user #login user
+    address = Address.objects.all()
+   
+    
+    if request.method == 'POST':
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            address = form.save(commit=False)
+            address.user = user
+            address.save()
+            return redirect('Norder_list', user.pk)
+        else:
+            return HttpResponseRedirect('index')
+
+
+    else:
+        form =AddressForm()
+    return render(request, 'address.html', {'form':form})
+
+
+     

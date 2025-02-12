@@ -1,5 +1,5 @@
 from django import forms
-from .models import Order
+from .models import Order, Address
 
 
 class OrderForm(forms.ModelForm):
@@ -16,3 +16,12 @@ class OrderForm(forms.ModelForm):
         }
 
 
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ['street']
+       
+        widgets = {
+            'street': forms.TextInput(),
+                       
+        }

@@ -99,3 +99,15 @@ class Appointment(models.Model):
 
     class Meta:
         ordering=["-sent_date"]
+
+class Address(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE, )
+
+    street = models.CharField(max_length=50)
+    
+    def __str__(self):
+        return self.street
+
+    

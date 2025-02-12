@@ -18,4 +18,5 @@ urlpatterns = [
     url(r'^(?P<category_id>[0-9]+)/$', views.show_category, name='show_category'),
     url(r'^order/(?P<pk>[0-9]+)/delete', views.delete_order, name='delete_order'), 
     url(r'^buythis/(?P<pk>[0-9]+)/$', views.buythis, name='buythis'),
+    url(r'^address/(?P<pk>[0-9]+)/$', views.address, name='address'),
 ]    
