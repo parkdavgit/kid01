@@ -9,30 +9,27 @@ Order always add?
 next step to add delivery ADDRESS
 next step to add payment 
 
-@login_required        
-def address(request,pk):#user.pk =1 or 16
+def delete_order(request, pk): #user.pk =1 or 16 david
     
-    user = request.user #login user
-    address = Address.objects.all()
-    for i in address :
-        if i.user == user:
-            messages.success(request,'Address already exist')
-            return redirect('shop:Norder_list', user.pk)
+    user = request.user#david
+    orders = Order.objects.filter(user=user)
     
     if request.method == 'POST':
-        form = AddressForm(request.POST)
-        if form.is_valid():
-            address = form.save(commit=False)
-            address.user = user   
-                      
-            address.save()
-            return redirect('shop:Norder_list', user.pk)
-        
-        else:
-            return HttpResponseRedirect('index')
-             
-    else:
-        form = AddressForm()
-        context = {'user': user, 'form':form}
-        return render(request, 'shop/address.html', context)
+        for i in orders:
+            od= Order.objects.filter(user=user)
+        od.delete()
+        return redirect('shop:Norder_list', user.pk)      
+
+def delete_order(request, pk): #user.pk =1 or 16 david
     
+    user = request.user#david
+    order = Order.objects.filter(user=user)
+   
+    if request.method == 'POST':
+        pk =int(request.POST.get('product.products.id'))
+        
+        product = Product.objects.filter(pk=pk)
+
+        order = Order.objects.filter(user=user, products__in=product)
+        order.delete()
+        return redirect('shop:Norder_list', user.pk)              

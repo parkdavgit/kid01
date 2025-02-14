@@ -17,7 +17,9 @@
                     </h2>
                 
         </div>
-        
+
+        <form action="{% url 'delete_order' user.pk %}" method="POST">  
+              
         <div class="container my-3">
              
                 <h3>
@@ -74,6 +76,21 @@
                 {% endfor %}
                 </tbody>
             </table>
+
+
+            <div class="container my-3">
+                <table class="table">
+                    <thead class="thead-dark">
+                                <tr><td>선택 상품을<button type="submit" name="delete_order" value="delete_order">삭제하기</button>
+                                    {% csrf_token %}
+    
+                                </td>
+                                
+    
+                    </tr>
+                
+                </thead></table>
+                </div>
                 
             <div class="container my-3">
                 <table class="table">

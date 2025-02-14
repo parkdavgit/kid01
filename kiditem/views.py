@@ -145,7 +145,6 @@ def delete_cart(request, pk): #user.pk =1 or 16 david
             return redirect('cart', user.pk)
         
 def delete_order(request, pk): #user.pk =1 or 16 david
-    
     user = request.user#david
     order = Order.objects.filter(user=user)#
     quantity = 0
@@ -156,15 +155,16 @@ def delete_order(request, pk): #user.pk =1 or 16 david
         order = Order.objects.get(pk=pk)
         order.delete()
         return redirect('Norder_list', user.pk)
-        #for i in order:
-            #if i.products == product :
-                #quantity =  i.quantity
+        for i in order:
+            if i.products == product :
+                quantity =  i.quantity
 
-        #if quantity > 0 :
-            #product = Product.objects.filter(pk=pk)
-            #order = Order.objects.filter(user=user, products__in=product)
-            #order.delete()
-            #return redirect('Norder_list', user.pk)
+        if quantity > 0 :
+            product = Product.objects.filter(pk=pk)
+            order = Order.objects.filter(user=user, products__in=product)
+            order.delete()
+            return redirect('Norder_list', user.pk)
+    
 
 
 @login_required        
