@@ -152,9 +152,10 @@ def delete_order(request, pk): #user.pk =1 or 16 david
     if request.method == 'POST':
      
         pk =int(request.POST.get('product'))
-        order = Order.objects.get(pk=pk)
-        order.delete()
-        return redirect('Norder_list', user.pk)
+        product = Product.objects.get(pk=pk)
+        #order = Order.objects.get(pk=pk)
+        #order.delete()
+        #return redirect('Norder_list', user.pk)
         for i in order:
             if i.products == product :
                 quantity =  i.quantity
