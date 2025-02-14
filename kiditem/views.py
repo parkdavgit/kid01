@@ -151,7 +151,7 @@ def delete_order(request, pk): #user.pk =1 or 16 david
 
     if request.method == 'POST':
      
-        pk =int(request.POST.get('order_product'))
+        pk =int(request.POST.get('product'))
         order = Order.objects.get(pk=pk)
         order.delete()
         return redirect('Norder_list', user.pk)
