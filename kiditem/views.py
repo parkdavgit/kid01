@@ -153,9 +153,7 @@ def delete_order(request, pk): #user.pk =1 or 16 david
      
         pk =int(request.POST.get('product'))
         product = Product.objects.get(pk=pk)
-        #order = Order.objects.get(pk=pk)
-        #order.delete()
-        #return redirect('Norder_list', user.pk)
+        
         for i in order:
             if i.products == product :
                 quantity =  i.quantity
@@ -163,7 +161,10 @@ def delete_order(request, pk): #user.pk =1 or 16 david
         if quantity > 0 :
             product = Product.objects.filter(pk=pk)
             order = Order.objects.filter(user=user, products__in=product)
+            cart = Cart.objects.filter(user=user, products__in=product)
             order.delete()
+            cart.delete()
+
             return redirect('Norder_list', user.pk)
     
 
